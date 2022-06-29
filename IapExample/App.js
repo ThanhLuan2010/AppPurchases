@@ -4,7 +4,8 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  View,
+  View,TouchableOpacity,
+  ImageBackground
 } from 'react-native';
 import RNIap, {
   InAppPurchase,
@@ -29,11 +30,10 @@ const itemSkus = Platform.select({
     'com.cooni.point5000', // dooboolab
   ],
   android: [
-    // 'android.test.purchased',
-    // 'android.test.canceled',
-    // 'android.test.refunded',
-    // 'android.test.item_unavailable',
-    'my_product_id'
+    'android.test.purchased',
+    'android.test.canceled',
+    'android.test.refunded',
+    'android.test.item_unavailable',
     // 'point_1000', '5000_point', // dooboolab
   ],
 });
@@ -48,6 +48,14 @@ const itemSubs = Platform.select({
   ],
 });
 
+const fakeData = [
+  {title:'0.5$ FOR SET USER1', id:'id1'},
+  {title:'0.99$ FOR SET USER2', id:'id2'},
+  {title:'1.99$ FOR SET USER3', id:'id3'},
+  {title:'4.99$ FOR SET USER4', id:'id4'},
+  {title:'9.99$ FOR SET USER5', id:'id5'},
+]
+
 let purchaseUpdateSubscription;
 let purchaseErrorSubscription;
 
@@ -55,58 +63,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: Platform.select({
-      ios: 0,
-      android: 24,
-    }),
-    paddingTop: Platform.select({
-      ios: 0,
-      android: 24,
-    }),
-    backgroundColor: 'white',
-  },
-  header: {
-    flex: 20,
-    flexDirection: 'row',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  headerTxt: {
-    fontSize: 26,
-    color: 'green',
-  },
-  content: {
-    flex: 80,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignSelf: 'stretch',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  btn: {
-    height: 48,
-    width: 240,
-    alignSelf: 'center',
-    backgroundColor: '#00c40f',
-    borderRadius: 0,
-    borderWidth: 0,
-  },
-  txt: {
-    fontSize: 16,
-    color: 'white',
   },
 });
 
 class Page extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       productList: [],
       receipt: '',
@@ -157,6 +119,8 @@ class Page extends Component {
         Alert.alert('purchase error', JSON.stringify(error));
       },
     );
+
+    this.getItems()
   }
 
   componentWillUnmount(): void {
@@ -240,75 +204,45 @@ class Page extends Component {
     const receipt100 = receipt.substring(0, 100);
 
     return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.headerTxt}>react-native-iap V3</Text>
-        </View>
+      <ImageBackground source={require('./assets/background.jpg')} style={styles.container}>
         <View style={styles.content}>
+          <TouchableOpacity onPress={()=>this.props.navigation.goBack()} style={{marginTop:20, marginBottom:50, marginLeft:20 }}>
+            <Text style={{color:'white', fontSize:20}}>Back</Text>
+          </TouchableOpacity>
           <ScrollView style={{alignSelf: 'stretch'}}>
-            <View style={{height: 50}} />
-            <NativeButton
-              onPress={this.getAvailablePurchases}
-              activeOpacity={0.5}
-              style={styles.btn}
-              textStyle={styles.txt}
-            >
-              Get available purchases
-            </NativeButton>
-
-            <Text style={{margin: 5, fontSize: 15, alignSelf: 'center'}}>
-              {availableItemsMessage}
-            </Text>
-
-            <Text style={{margin: 5, fontSize: 9, alignSelf: 'center'}}>
-              {receipt100}
-            </Text>
-
-            <NativeButton
-              onPress={(): void => this.getItems()}
-              activeOpacity={0.5}
-              style={styles.btn}
-              textStyle={styles.txt}
-            >
-              Get Products ({productList.length})
-            </NativeButton>
-            {productList.map((product, i) => {
+            {fakeData.map((product, i) => {
               return (
-                <View
+                <TouchableOpacity
+                  onPress={()=>this.requestPurchase(product.productId)}
                   key={i}
                   style={{
                     flexDirection: 'column',
+                    backgroundColor:'white',
+                    marginBottom:20,
+                    marginHorizontal:20,
+                    paddingVertical:20,
+                    borderTopLeftRadius:15,
+                    borderBottomRightRadius:15,
+                    borderTopRightRadius:40,
+                    borderBottomLeftRadius:40
                   }}
                 >
                   <Text
                     style={{
-                      marginTop: 20,
-                      fontSize: 12,
-                      color: 'black',
-                      minHeight: 100,
+                      fontSize: 15,
                       alignSelf: 'center',
                       paddingHorizontal: 20,
+                      fontWeight:'bold'
                     }}
                   >
-                    {JSON.stringify(product)}
+                    {product.title}
                   </Text>
-                  <NativeButton
-                    // onPress={(): void => this.requestPurchase(product.productId)}
-                    onPress={(): void =>
-                      this.requestSubscription(product.productId)
-                    }
-                    activeOpacity={0.5}
-                    style={styles.btn}
-                    textStyle={styles.txt}
-                  >
-                    Request purchase for above product
-                  </NativeButton>
-                </View>
+                </TouchableOpacity>
               );
             })}
           </ScrollView>
         </View>
-      </View>
+      </ImageBackground>
     );
   }
 }
