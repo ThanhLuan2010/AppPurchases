@@ -1,4 +1,4 @@
-package com.iapexample;
+package com.guidefornewiap;
 
 import com.facebook.react.ReactActivity;
 

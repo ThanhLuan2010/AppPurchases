@@ -19,10 +19,10 @@ export default function LauchScreen({navigation}) {
     return (
         <>
           <ImageBackground
-            style={{flex:1, justifyContent:'flex-end', alignItems:'center'}}
+            style={{flex:1, justifyContent:'center', alignItems:'center'}}
             source={require('./assets/background.jpg')}>
-                <TouchableOpacity onPress={request} style={{backgroundColor:'green', borderRadius:15, paddingHorizontal:40, paddingVertical:10, marginBottom:70, justifyContent:'center'}}>
-                    <Text style={{color:'white', fontWeight:'bold', fontSize:20}}>Upgrade</Text>
+                <TouchableOpacity onPress={request} style={{backgroundColor:'red', paddingHorizontal:40, paddingVertical:10, marginBottom:70, justifyContent:'center'}}>
+                    <Text style={{color:'white', fontWeight:'bold', fontSize:20}}>Buy now</Text>
                    {loading && <ActivityIndicator color={'white'} style={{position:'absolute', right:10}}/>} 
                 </TouchableOpacity>
         </ImageBackground>

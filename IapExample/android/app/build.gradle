@@ -128,7 +128,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.iapexample"
+        applicationId "com.guidefornewiap"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -200,6 +200,7 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:0.65.1"
+    implementation "com.android.billingclient:billing:5.0.0"
     // included with Autolinking: 
     //implementation project(path: ':react-native-iap')
 
