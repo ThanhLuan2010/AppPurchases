@@ -128,7 +128,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.iapexample"
+        applicationId "com.iap.appabcxyz"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

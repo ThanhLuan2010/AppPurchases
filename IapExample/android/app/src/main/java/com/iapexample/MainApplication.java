@@ -1,4 +1,4 @@
-package com.iapexample;
+package com.iap.appabcxyz;
 
 import android.app.Application;
 import android.content.Context;

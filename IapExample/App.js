@@ -30,10 +30,12 @@ const itemSkus = Platform.select({
     'com.cooni.point5000', // dooboolab
   ],
   android: [
-    'android.test.purchased',
-    'android.test.canceled',
-    'android.test.refunded',
-    'android.test.item_unavailable',
+    'id1',
+    'id2',
+    'id2',
+    'id3',
+    'id4',
+    'id5',
     // 'point_1000', '5000_point', // dooboolab
   ],
 });
@@ -49,11 +51,11 @@ const itemSubs = Platform.select({
 });
 
 const fakeData = [
-  {title:'0.5$ FOR SET USER1', id:'id1'},
-  {title:'0.99$ FOR SET USER2', id:'id2'},
-  {title:'1.99$ FOR SET USER3', id:'id3'},
-  {title:'4.99$ FOR SET USER4', id:'id4'},
-  {title:'9.99$ FOR SET USER5', id:'id5'},
+  {title:'0.5$ FOR SET USER1', productId:'id1'},
+  {title:'0.99$ FOR SET USER2', productId:'id2'},
+  {title:'1.99$ FOR SET USER3', productId:'id3'},
+  {title:'4.99$ FOR SET USER4', productId:'id4'},
+  {title:'9.99$ FOR SET USER5', productId:'id5'},
 ]
 
 let purchaseUpdateSubscription;
@@ -202,6 +204,10 @@ class Page extends Component {
   render(): React.ReactElement {
     const {productList, receipt, availableItemsMessage} = this.state;
     const receipt100 = receipt.substring(0, 100);
+    let data = productList
+    if (data?.length == 0) {
+      data = fakeData
+    }
 
     return (
       <ImageBackground source={require('./assets/background.jpg')} style={styles.container}>
@@ -210,7 +216,17 @@ class Page extends Component {
             <Text style={{color:'white', fontSize:20}}>Back</Text>
           </TouchableOpacity>
           <ScrollView style={{alignSelf: 'stretch'}}>
-            {fakeData.map((product, i) => {
+            {data.map((product, i) => {
+              const title = i === 0 ? '0.5$ FOR SET USER1'
+                : i === 1 ? '0.99$ FOR SET USER2'
+                  : i === 2 ? '1.99$ FOR SET USER3'
+                    : i === 3 ? '4.99$ FOR SET USER4'
+                      : i === 4 ? '9.99$ FOR SET USER5' : null
+              const price = i === 0 ? '0.5$'
+                : i === 1 ? '0.99$'
+                  : i === 2 ? '1.99$'
+                    : i === 3 ? '4.99$'
+                      : i === 4 ? '9.99$' : null
               return (
                 <TouchableOpacity
                   onPress={()=>this.requestPurchase(product.productId)}
@@ -235,7 +251,7 @@ class Page extends Component {
                       fontWeight:'bold'
                     }}
                   >
-                    {product.title}
+                    {title}
                   </Text>
                 </TouchableOpacity>
               );

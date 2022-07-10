@@ -1,4 +1,4 @@
-package com.iapexample;
+package com.iap.appabcxyz;
 
 import com.facebook.react.ReactActivity;
 
