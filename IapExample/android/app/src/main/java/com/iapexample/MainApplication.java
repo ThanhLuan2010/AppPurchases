@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 package com.iap.appabcxyz;
+=======
+package com.webmusicabcaa;
+>>>>>>> Stashed changes
 
 import android.app.Application;
 import android.content.Context;

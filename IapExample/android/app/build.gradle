@@ -128,7 +128,11 @@ android {
     }
 
     defaultConfig {
+<<<<<<< Updated upstream
         applicationId "com.iap.appabcxyz"
+=======
+        applicationId "com.webmusicabcaa"
+>>>>>>> Stashed changes
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

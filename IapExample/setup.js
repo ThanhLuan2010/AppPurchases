@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import App from './App'
 import lauchScreen from './lauchScreen';
+import mediaScreen from './mediaScreen';
 const Stack = createStackNavigator();
 export default function Setup() {
 
@@ -17,6 +18,7 @@ export default function Setup() {
                 <>
                     <Stack.Screen name="lauchScreen" component={lauchScreen} />
                     <Stack.Screen name="App" component={App} />
+                    <Stack.Screen name="mediaScreen" component={mediaScreen} />
                     
                 </>
             </Stack.Navigator>

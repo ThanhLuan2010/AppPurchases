@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 package com.iap.appabcxyz;
+=======
+package com.webmusicabcaa;
+>>>>>>> Stashed changes
 
 import com.facebook.react.ReactActivity;
 

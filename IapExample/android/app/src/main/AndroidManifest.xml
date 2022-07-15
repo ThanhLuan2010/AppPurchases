@@ -1,5 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< Updated upstream
   package="com.iap.appabcxyz">
+=======
+  package="com.webmusicabcaa">
+>>>>>>> Stashed changes
 
     <uses-permission android:name="android.permission.INTERNET" />
 

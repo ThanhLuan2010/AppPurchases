@@ -4,8 +4,9 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  View,TouchableOpacity,
-  ImageBackground
+  View, TouchableOpacity,
+  ImageBackground,
+  Modal
 } from 'react-native';
 import RNIap, {
   InAppPurchase,
@@ -18,7 +19,7 @@ import RNIap, {
   purchaseErrorListener,
   purchaseUpdatedListener,
 } from 'react-native-iap';
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import NativeButton from 'apsl-react-native-button';
 
@@ -30,13 +31,27 @@ const itemSkus = Platform.select({
     'com.cooni.point5000', // dooboolab
   ],
   android: [
+<<<<<<< Updated upstream
     'id1',
     'id2',
     'id2',
     'id3',
     'id4',
     'id5',
+=======
+    // 'android.test.purchased',
+    // 'android.test.canceled',
+    // 'android.test.refunded',
+    // 'android.test.item_unavailable',
+
+>>>>>>> Stashed changes
     // 'point_1000', '5000_point', // dooboolab
+    'id1',
+    'id2',
+    'id2',
+    'id3',
+    'id4',
+    'id5',
   ],
 });
 
@@ -51,11 +66,19 @@ const itemSubs = Platform.select({
 });
 
 const fakeData = [
+<<<<<<< Updated upstream
   {title:'0.5$ FOR SET USER1', productId:'id1'},
   {title:'0.99$ FOR SET USER2', productId:'id2'},
   {title:'1.99$ FOR SET USER3', productId:'id3'},
   {title:'4.99$ FOR SET USER4', productId:'id4'},
   {title:'9.99$ FOR SET USER5', productId:'id5'},
+=======
+  { title: '0.5$ FOR SET USER1', productId: 'id1' },
+  { title: '0.99$ FOR SET USER2', productId: 'id2' },
+  { title: '1.99$ FOR SET USER3', productId: 'id3' },
+  { title: '4.99$ FOR SET USER4', productId: 'id4' },
+  { title: '9.99$ FOR SET USER5', productId: 'id5' },
+>>>>>>> Stashed changes
 ]
 
 let purchaseUpdateSubscription;
@@ -110,7 +133,7 @@ class Page extends Component {
             console.warn('ackErr', ackErr);
           }
 
-          this.setState({receipt}, () => this.goNext());
+          this.setState({ receipt }, () => this.goNext());
         }
       },
     );
@@ -146,9 +169,9 @@ class Page extends Component {
   getItems = async (): void => {
     try {
       const products = await RNIap.getProducts(itemSkus);
+      console.log('============', products)
       // const products = await RNIap.getSubscriptions(itemSkus);
-      console.log('Products', products);
-      this.setState({productList: products});
+      this.setState({ productList: products });
     } catch (err) {
       console.warn(err.code, err.message);
     }
@@ -158,7 +181,7 @@ class Page extends Component {
     try {
       const products = await RNIap.getSubscriptions(itemSubs);
       console.log('Products', products);
-      this.setState({productList: products});
+      this.setState({ productList: products });
     } catch (err) {
       console.warn(err.code, err.message);
     }
@@ -202,7 +225,7 @@ class Page extends Component {
   };
 
   render(): React.ReactElement {
-    const {productList, receipt, availableItemsMessage} = this.state;
+    const { productList, receipt, availableItemsMessage } = this.state;
     const receipt100 = receipt.substring(0, 100);
     let data = productList
     if (data?.length == 0) {
@@ -210,11 +233,12 @@ class Page extends Component {
     }
 
     return (
-      <ImageBackground source={require('./assets/background.jpg')} style={styles.container}>
+      <ImageBackground resizeMode='cover' source={require('./assets/z3556952069500_e0138f189c5ce43cffbc3964307c52dc.jpg')} style={styles.container}>
         <View style={styles.content}>
-          <TouchableOpacity onPress={()=>this.props.navigation.goBack()} style={{marginTop:20, marginBottom:50, marginLeft:20 }}>
-            <Text style={{color:'white', fontSize:20}}>Back</Text>
+          <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ marginTop: 20, marginBottom: 50, marginLeft: 20 }}>
+            <Text style={{ color: 'white', fontSize: 20 }}>Back</Text>
           </TouchableOpacity>
+<<<<<<< Updated upstream
           <ScrollView style={{alignSelf: 'stretch'}}>
             {data.map((product, i) => {
               const title = i === 0 ? '0.5$ FOR SET USER1'
@@ -222,6 +246,15 @@ class Page extends Component {
                   : i === 2 ? '1.99$ FOR SET USER3'
                     : i === 3 ? '4.99$ FOR SET USER4'
                       : i === 4 ? '9.99$ FOR SET USER5' : null
+=======
+          <ScrollView style={{ alignSelf: 'stretch' }}>
+            {data.map((product, i) => {
+              const title = i === 0 ? 'Package1 (0.5$)'
+                : i === 1 ? 'Package2 (0.99$)'
+                  : i === 2 ? 'Package3 (1.99$)'
+                    : i === 3 ? 'Package4 (4.99$)'
+                      : i === 4 ? 'Package5 (9.99$)' : null
+>>>>>>> Stashed changes
               const price = i === 0 ? '0.5$'
                 : i === 1 ? '0.99$'
                   : i === 2 ? '1.99$'
@@ -229,20 +262,24 @@ class Page extends Component {
                       : i === 4 ? '9.99$' : null
               return (
                 <TouchableOpacity
-                  onPress={()=>this.requestPurchase(product.productId)}
+                  onPress={() => this.requestPurchase(product.productId)}
                   key={i}
                   style={{
-                    flexDirection: 'column',
-                    backgroundColor:'white',
-                    marginBottom:20,
-                    marginHorizontal:20,
-                    paddingVertical:20,
-                    borderTopLeftRadius:15,
-                    borderBottomRightRadius:15,
-                    borderTopRightRadius:40,
-                    borderBottomLeftRadius:40
+                    flexDirection: 'row',
+                    backgroundColor: 'white',
+                    marginBottom: 20,
+                    marginHorizontal: 20,
+                    paddingVertical: 20,
+                    borderRadius: 10,
+                    // justifyContent: 'space-between',
+                    alignItems: 'center'
+                    // borderTopLeftRadius:15,
+                    // borderBottomRightRadius:15,
+                    // borderTopRightRadius:40,
+                    // borderBottomLeftRadius:40
                   }}
                 >
+<<<<<<< Updated upstream
                   <Text
                     style={{
                       fontSize: 15,
@@ -253,6 +290,27 @@ class Page extends Component {
                   >
                     {title}
                   </Text>
+=======
+                  <View>
+                    {/* <Text
+                      style={{
+                        fontSize: 15,
+                        // alignSelf: 'center',
+                        paddingHorizontal: 20,
+                        fontWeight: 'bold',
+                        color: 'red'
+                      }}
+                    >
+                      {price} */}
+                    {/* </Text> */}
+                    <Text style={{ marginHorizontal: 20, fontWeight: 'bold', color: 'red', textAlign: 'center' }}>{title}</Text>
+                  </View>
+
+                  {/* <TouchableOpacity onPress={() => this.requestPurchase(product.productId)} style={{backgroundColor:'red', marginHorizontal:5, paddingHorizontal:20, paddingVertical:5, borderRadius:10}}>
+                    <Text style={{fontWeight:'bold', color:'white'}}>Buy</Text>
+                  </TouchableOpacity> */}
+
+>>>>>>> Stashed changes
                 </TouchableOpacity>
               );
             })}
